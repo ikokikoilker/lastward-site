@@ -4,29 +4,90 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Lastward — Survivors Roguelike</title>
-<meta name="description" content="Lastward is a story-driven, hand-drawn bullet-heaven roguelike for iPhone. Survive the horde. Hold the ward. One more night.">
+<meta name="description" content="Lastward is a fast, one-thumb pixel-art survivors-like for iPhone. Twenty-minute runs, 16 weapons, four survivors. Survive the horde. Hold the ward. One more night.">
+<meta property="og:title" content="Lastward — Survivors Roguelike">
+<meta property="og:description" content="A fast, one-thumb pixel-art survivors-like for iPhone. Survive the horde. Hold the ward. One more night.">
+<meta property="og:image" content="assets/trailer_poster.jpg">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
 <style>
-  :root { --bg:#0e0c10; --card:#17141a; --text:#e8e2d9; --muted:#9a938a; --accent:#ff7a3c; }
+  :root { --bg:#0e0c10; --card:#17141a; --text:#e8e2d9; --muted:#9a938a; --accent:#ff7a3c; --line:#262028; }
   * { margin:0; padding:0; box-sizing:border-box; }
   body { background:var(--bg); color:var(--text); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; line-height:1.6; }
   .wrap { max-width:720px; margin:0 auto; padding:48px 24px 64px; }
   h1 { font-size:2.6rem; letter-spacing:.12em; color:var(--accent); text-transform:uppercase; }
-  .tagline { color:var(--muted); margin:8px 0 40px; font-size:1.05rem; }
-  .card { background:var(--card); border:1px solid #262028; border-radius:12px; padding:20px 24px; margin:16px 0; }
+  .tagline { color:var(--muted); margin:8px 0 12px; font-size:1.05rem; }
+  .line { color:var(--text); font-size:1.05rem; margin-bottom:24px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:20px 24px; margin:16px 0; }
   .card h2 { font-size:1.1rem; margin-bottom:6px; }
   .card p { color:var(--muted); font-size:.95rem; }
   a { color:var(--accent); text-decoration:none; }
   a:hover { text-decoration:underline; }
-  .soon { display:inline-block; border:1px solid var(--accent); color:var(--accent); border-radius:999px; padding:4px 14px; font-size:.85rem; margin-bottom:32px; }
+  .soon { display:inline-block; border:1px solid var(--accent); color:var(--accent); border-radius:999px; padding:4px 14px; font-size:.85rem; margin-bottom:36px; }
+
+  section { margin:48px 0; }
+  section > h2 { font-size:.85rem; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); margin-bottom:16px; }
+
+  /* Trailer: vertical 9:16, click-to-play so YouTube loads only on demand */
+  .trailer { position:relative; width:100%; max-width:320px; margin:0 auto; aspect-ratio:9/16; border-radius:16px; overflow:hidden; border:1px solid var(--line); background:#000; }
+  .trailer img, .trailer iframe { width:100%; height:100%; display:block; border:0; object-fit:cover; }
+  .trailer button { position:absolute; inset:0; width:100%; height:100%; padding:0; border:0; background:transparent; cursor:pointer; display:flex; align-items:center; justify-content:center; }
+  .trailer button::after { content:""; position:relative; z-index:1; width:0; height:0; border-style:solid; border-width:16px 0 16px 27px; border-color:transparent transparent transparent #0e0c10; margin-left:6px; }
+  .play-ring { position:absolute; width:76px; height:76px; border-radius:50%; background:var(--accent); box-shadow:0 6px 24px rgba(0,0,0,.55); transition:transform .15s ease; }
+  .trailer button:hover .play-ring { transform:scale(1.06); }
+  .note { color:var(--muted); font-size:.85rem; text-align:center; margin-top:10px; }
+
+  /* Screenshots: scrollable strip on phones, fits the row on desktop */
+  .shots { display:flex; gap:12px; overflow-x:auto; padding-bottom:8px; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; }
+  .shots img { width:160px; flex:0 0 auto; border-radius:10px; border:1px solid var(--line); scroll-snap-align:start; }
+
+  ul.feats { list-style:none; display:grid; grid-template-columns:1fr; gap:10px; }
+  ul.feats li { color:var(--muted); font-size:.95rem; padding-left:18px; position:relative; }
+  ul.feats li::before { content:"•"; color:var(--accent); position:absolute; left:0; }
+  @media (min-width:560px) { ul.feats { grid-template-columns:1fr 1fr; } }
+
   footer { margin-top:48px; color:var(--muted); font-size:.85rem; }
-  .lang { float:right; font-size:.9rem; }
 </style>
 </head>
 <body>
 <div class="wrap">
   <h1>Lastward</h1>
-  <p class="tagline">A story-driven, hand-drawn bullet-heaven roguelike for iPhone.<br>Survive the horde. Hold the ward. One more night.</p>
+  <p class="tagline">A fast, one-thumb pixel-art survivors-like for iPhone.</p>
+  <p class="line">Survive the horde. Hold the ward. One more night.</p>
   <span class="soon">Coming soon to the App Store</span>
+
+  <section>
+    <h2>Trailer</h2>
+    <div class="trailer" id="trailer">
+      <img src="assets/trailer_poster.jpg" alt="Lastward gameplay — a survivor surrounded by the horde">
+      <button type="button" aria-label="Play the Lastward trailer">
+        <span class="play-ring"></span>
+      </button>
+    </div>
+    <p class="note">Plays from YouTube — nothing loads from them until you press play.</p>
+  </section>
+
+  <section>
+    <h2>Screenshots</h2>
+    <div class="shots">
+      <img src="assets/01_action_swarm.png" alt="Fighting a swarm of enemies" loading="lazy" width="160">
+      <img src="assets/02_levelup_cards.png" alt="Choosing a level-up card" loading="lazy" width="160">
+      <img src="assets/03_heroes.png" alt="The hero roster" loading="lazy" width="160">
+      <img src="assets/06_shop.png" alt="The shop screen" loading="lazy" width="160">
+    </div>
+  </section>
+
+  <section>
+    <h2>What it is</h2>
+    <ul class="feats">
+      <li>Twenty-minute runs, then an endless mode with no finish line</li>
+      <li>16 weapons, each with an evolution to discover</li>
+      <li>Four survivors, four arenas, a different hand every run</li>
+      <li>One thumb, portrait, never rotates</li>
+      <li>Fully offline — no connection required</li>
+      <li>No forced ads, no energy timers, no paywalled progression</li>
+    </ul>
+  </section>
 
   <div class="card">
     <h2><a href="support.html">Support</a> · <a href="support-tr.html">Destek (Türkçe)</a></h2>
@@ -40,5 +101,18 @@
 
   <footer>© 2026 Lastward. All rights reserved.</footer>
 </div>
+
+<script>
+  document.getElementById('trailer').querySelector('button').addEventListener('click', function () {
+    var box = document.getElementById('trailer');
+    var f = document.createElement('iframe');
+    f.src = 'https://www.youtube-nocookie.com/embed/t6MPKeEqMVI?autoplay=1&rel=0&playsinline=1';
+    f.title = 'Lastward — Official Trailer';
+    f.allow = 'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; web-share';
+    f.referrerPolicy = 'strict-origin-when-cross-origin';
+    f.allowFullscreen = true;
+    box.replaceChildren(f);
+  });
+</script>
 </body>
 </html>
